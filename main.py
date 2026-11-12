@@ -1,5 +1,5 @@
 import json,math,os,random
-# MC top-5 forecaster v3 (retuned 2026-11-12).
+# MC top-5 forecaster v4 (2026-11-12): v3 order + house-baseline sizes.
 from collections import defaultdict as D
 I=os.environ.get('MAKEFUN_INPUT_DIR','/input');O=os.environ.get('MAKEFUN_OUTPUT_DIR','/output')
 def pt(s):
@@ -76,11 +76,11 @@ for k in range(1,P+1):
 mr={m:rs[m]/max(rn[m],1) for m in rs};t5=sorted(mr,key=lambda m:mr[m])[:P]
 sz=[]
 for k in range(1,P+1):
- tot=sum(B[k].values()) or 1;mn=pc[k-1]+.8*(1-math.exp(-hm));sd=.25+.1*math.sqrt(max(hm,.1))
+ mn=pc[k-1];sd=.35
  for b in range(len(E)+1):
   lo=float('-inf') if b==0 else E[b-1];hi=float('inf') if b==len(E) else E[b]
   pa=.5*(math.erf((hi-mn)/(sd*1.41421356))-math.erf((lo-mn)/(sd*1.41421356)))
-  p=(.85*B[k].get(b,0)/tot+.15*pa)*.95
-  if p>=.0005:sz.append({'place':k,'bin':b,'p':round(p,6)})
+  u=math.floor(pa*1000000)
+  if u>0:sz.append({'place':k,'bin':b,'p':u/1000000})
 os.makedirs(O,exist_ok=True)
 open(O+'/'+T['output'],'w').write(json.dumps({'probabilities':pr,'top5':t5,'sizes':sz})+'\n')

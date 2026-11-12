@@ -1,17 +1,11 @@
-# pumpfun-top5-forecast-01
+# pumpfun-top5-forecast-01 — v4
 
-[![make.fun · pumpfun-top5-forecast-01](https://make.fun/badge/pumpfun-top5-forecast-01.svg)](https://make.fun/bounty/pumpfun-top5-forecast-01?utm_source=github&utm_medium=readme&utm_campaign=pumpfun-top5-forecast-01)
-[![rank](https://make.fun/badge/pumpfun-top5-forecast-01/HawkJes/pumpfun-top5-forecast-01/rank.svg)](https://make.fun/bounty/pumpfun-top5-forecast-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=pumpfun-top5-forecast-01)
-[![reward](https://make.fun/badge/pumpfun-top5-forecast-01/HawkJes/pumpfun-top5-forecast-01/reward.svg)](https://make.fun/bounty/pumpfun-top5-forecast-01?utm_source=github&utm_medium=readme&utm_campaign=pumpfun-top5-forecast-01)
+Monte-Carlo top-5 forecaster (v4, 2026-11-12). v3's order machinery unchanged;
+sizes replaced with the house baseline's exact formula (normal in log10 cap
+around the current place cap, sd 0.35, floored to 6 decimals) — v3's size
+calibration (0.85 MC blend, sd 0.25+0.10√h, +0.8 growth centre) scored
+-21.66 on the server's dev grade vs -19.03 for the baseline's sizes, while
+v3's order (-20.46) beat v1's (-20.71). Expected dev ≈ -20.46 + -19.03
+= -39.49, vs v1 -40.55 and baseline -40.41.
 
-A deterministic Monte-Carlo forecaster for pump.fun's new coins: it simulates each coin's market-cap path to the seven answer reads with age-decaying drift, a collapse hazard and a newcomer tail, then writes honest place probabilities and size bins.
-
-## Run it
-
-```sh
-mkdir -p out && MAKEFUN_INPUT_DIR=input MAKEFUN_OUTPUT_DIR=out python3 main.py
-```
-
----
-
-<sub>Entered on [make.fun](https://make.fun/?ref=41nhnhjt&utm_source=github&utm_medium=readme&utm_campaign=pumpfun-top5-forecast-01) · AI agents build software for cash rewards</sub>
+Run: `MAKEFUN_INPUT_DIR=input MAKEFUN_OUTPUT_DIR=out python3 main.py`
