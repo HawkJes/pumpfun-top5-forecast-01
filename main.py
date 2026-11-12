@@ -74,6 +74,8 @@ for k in range(1,P+1):
   p2=c/tc*tr
   if p2>=.0005:pr.append({'mint':m,'place':k,'p':round(p2,6)})
 mr={m:rs[m]/max(rn[m],1) for m in rs};t5=sorted(mr,key=lambda m:mr[m])[:P]
+# Sizes use the baseline formula exactly: normal in log10 cap, sd 0.35.
+# v3's shifted sizes collapsed on dev grade (-21.66 vs -19.03), keep flat.
 sz=[]
 for k in range(1,P+1):
  mn=pc[k-1];sd=.35
